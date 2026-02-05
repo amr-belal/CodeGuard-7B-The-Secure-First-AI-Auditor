@@ -1,3 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+
+# Data & Models (TOO BIG for Git)
+data/
+models/
+*.pt
+*.safetensors
+*.gguf
+
+# IDE
+.vscode/
+.idea/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
