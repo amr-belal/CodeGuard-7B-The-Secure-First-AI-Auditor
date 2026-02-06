@@ -1,3 +1,20 @@
-groq
-pytest
-python-dotenv
+[project]
+name = "codeguard-7b"
+version = "0.1.0"
+description = "Secure-First AI Auditor using DPO"
+authors = [{name = "Amr Belal"}]
+dependencies = [
+    "groq",
+    "pytest",
+    "python-dotenv",
+    "datasets",
+    "tqdm",
+    "pyarrow",
+    "pandas"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.black]
+line-length = 88
