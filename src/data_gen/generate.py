@@ -1,10 +1,9 @@
-import os 
+import os
 import json
 from groq import Groq
 from dotenv import load_dotenv
 import time
 from tqdm import tqdm
-
 
 load_dotenv()
 
@@ -40,23 +39,26 @@ def get_100_topics():
     completion = client.chat.completions.create(
         messages=[{"role": "user", "content": TOPIC_GENERATOR_PROMPT}],
         model="llama-3.3-70b-versatile",
-        temperature=0.7
+        temperature=0.7,
     )
-    topics = completion.choices[0].message.content.strip().split('\n')
-    
-    return [t.split('. ')[-1] if '. ' in t else t for t in topics][:100]
+    topics = completion.choices[0].message.content.strip().split("\n")
+
+    return [t.split(". ")[-1] if ". " in t else t for t in topics][:100]
 
 
 def generate_dpo_pair(topic):
     try:
         completion = client.chat.completions.create(
-            messages = [
+            messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": f"Generate a DPO pair for the following security topic: {topic}"}
+                {
+                    "role": "user",
+                    "content": f"Generate a DPO pair for the following security topic: {topic}",
+                },
             ],
-            model = "llama-3.1-8b-instant",
-            temperature = 0.7,
-            response_format = {"type": "json_object"}
+            model="llama-3.1-8b-instant",
+            temperature=0.7,
+            response_format={"type": "json_object"},
         )
         return json.loads(completion.choices[0].message.content)
     except Exception as e:
@@ -68,14 +70,12 @@ if __name__ == "__main__":
     all_topics = get_100_topics()
     dataset = []
 
-   
     for topic in tqdm(all_topics, desc="Building Dataset"):
         data = generate_dpo_pair(topic)
         if data:
             dataset.append(data)
-        
-       
-        time.sleep(1) 
+
+        time.sleep(1)
 
     # الحفظ النهائي
     os.makedirs("data/raw", exist_ok=True)
