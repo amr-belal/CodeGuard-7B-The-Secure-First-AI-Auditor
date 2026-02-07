@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
         time.sleep(1)
 
-    # الحفظ النهائي
+   
     os.makedirs("data/raw", exist_ok=True)
     with open("data/raw/full_dataset_100.json", "w") as f:
         json.dump(dataset, f, indent=4)
