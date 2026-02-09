@@ -10,7 +10,12 @@ dependencies = [
     "datasets",
     "tqdm",
     "pyarrow",
-    "pandas"
+    "pandas",
+    "transformers",
+    "sentence-transformers",
+    "faiss-cpu",
+    chromadb
+    
 ]
 
 [tool.pytest.ini_options]
