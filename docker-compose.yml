@@ -1,0 +1,21 @@
+services:
+  dashboard:
+    build: .
+    ports:
+      - "8501:8501"
+    volumes:
+      - /mnt/d/summer-2026/MyModels/CodeGaurd:/app/models
+      - ./data:/app/data
+    environment:
+      - PYTHONPATH=/app
+
+  api:
+    build: .
+    command: python src/main.py
+    ports:
+      - "8000:8000"
+    volumes:
+      - /mnt/d/summer-2026/MyModels/CodeGaurd:/app/models
+      - ./data:/app/data
+    environment:
+      - PYTHONPATH=/app
